@@ -1,0 +1,51 @@
+<!-- <h2>Register</h2>
+<form (ngSubmit)="onSubmit()">
+  <input type ="text" name="name" [(ngModel)]="name" placeholder="Name">
+  <input type="text" name="username" [(ngModel)]="username" placeholder="Username">
+  <input type="email" name="email" [(ngModel)]="email" placeholder="Email">
+  <input type="password" name="password" [(ngModel)]="password" placeholder="Password">
+  <button type="submit">Register</button>
+</form> -->
+
+
+
+<div class="bg-slate-200 h-dvh flex">
+    <!-- 1st half -->
+    <div class="w-1/2 mt-20 ml-56 mb-16 drop-shadow-xl" style="background-color:#90CCBA;">
+        <h1 class="text-white mt-7 ml-8 font-bold">Todo List</h1>
+        <h1 class="font-bold text-white text-5xl mt-10 pt-20 ml-8">Welcome</h1>
+        <h1 class="font-bold text-white text-5xl mt-7 ml-8">Back!</h1>
+    </div>
+
+    <!-- 2nd Half -->
+    <div class="basis-1/2 bg-white mt-20 mb-16 mr-56 drop-shadow-2xl">
+        <form (ngSubmit)="onSubmit()">
+            <h1 class="text-black text-2xl font-bold mt-14 ml-8">Sign up</h1>
+            <p class="text-slate-400 mt-2 ml-8">Create Your Account.</p>
+
+            <!-- Name -->
+            <h2 class="text-black text-sm font-semibold mt-2 ml-8">Name</h2>
+            <input type="text" name="name" class="border border-slate-500 w-80 h-8 mt-3 ml-8 rounded" [(ngModel)]="name" required>
+
+            <!-- Username -->
+            <h2 class="text-black text-sm font-semibold mt-2 ml-8">Username</h2>
+            <input type="text" name="username" class="border border-slate-500 w-80 h-8 mt-3 ml-8 rounded" [(ngModel)]="username" required>
+
+            <!-- Email -->
+            <h2 class="text-black text-sm font-semibold mt-2 ml-8">Email</h2>
+            <input type="email" name="email" class="border border-slate-500 w-80 h-8 mt-3 ml-8 rounded" [(ngModel)]="email" required>
+
+            <!-- Password -->
+            <h2 class="text-black text-sm font-semibold mt-2 ml-8">Password</h2>
+            <input type="password" name="password" class="border border-slate-500 w-80 h-8 mt-3 ml-8 rounded" [(ngModel)]="password" required>
+
+            <!-- Button -->
+            <button type="submit" class="text-white font-bold w-80 h-10 ml-8 mb-4 mt-6 rounded" style="background-color:#90CCBA;">Sign up</button>
+        </form>
+
+        <div class="flex">
+            <p class="text-slate-400 ml-8 mr-2">Already have an account? </p>
+            <a href="/login" class="mb-12" style="color:#90CCBA;">Login</a>
+        </div>
+    </div>
+</div>

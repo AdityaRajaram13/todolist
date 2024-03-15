@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h4 class="modal-title">Update Task</h4>
+    <button type="button" class="close" aria-label="Close" (click)="onCancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" [(ngModel)]="updatedTask.title">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" [(ngModel)]="updatedTask.description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="dueDate">Due Date</label>
+        <input type="date" class="form-control" id="dueDate" [(ngModel)]="updatedTask.dueDate">
+      </div>
+      <div class="form-group">
+        <label for="priority">Priority</label>
+        <select class="form-control" id="priority" [(ngModel)]="updatedTask.priority">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="onUpdate()">Update</button>
+    <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+  </div>
+  
