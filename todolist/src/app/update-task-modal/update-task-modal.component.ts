@@ -25,7 +25,6 @@ export class UpdateTaskModalComponent {
   }
 
   onCancel(): void {
-    // If user cancels, close the modal
     this.activeModal.dismiss('cancel');
   }
 }

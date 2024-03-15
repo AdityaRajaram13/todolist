@@ -1,38 +1,3 @@
-// import { Component } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { AuthService } from '../services/auth.service';
-// @Component({
-//   selector: 'app-addtask',
-//   templateUrl: './addtask.component.html',
-//   styleUrls: ['./addtask.component.css']
-// })
-// export class AddtaskComponent {
-//   taskForm = {
-//     title: '',
-//     description: '',
-//     dueDate: '',
-//     priority: ''
-//   };
-
-//   constructor(private authService: AuthService, private http: HttpClient) {}
-
-//   addTask() {
-//     const { title, description, dueDate, priority } = this.taskForm;
-//     const token = localStorage.getItem('token');
-//     const headers = { Authorization: `Bearer ${token}` };
-//     const body = { title, description, dueDate, priority };
-
-//     this.http.post<any>('http://localhost:4000/api/createtask', body, { headers }).subscribe(
-//       (response) => {
-//         console.log('Task created successfully:', response);
-//       },
-//       (error) => {
-//         console.error('Error creating task:', error);
-//       }
-//     );
-//   }
-// }
-
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
@@ -47,7 +12,7 @@ export class AddtaskComponent {
     title: '',
     description: '',
     dueDate: '',
-    priority: 'medium'
+    priority: 'high'
   };
 
   constructor(private authService: AuthService, private http: HttpClient) {}

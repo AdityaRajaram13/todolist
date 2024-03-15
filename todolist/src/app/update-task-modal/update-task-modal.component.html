@@ -1,4 +1,4 @@
-<div class="modal-header">
+<!-- <div class="modal-header">
     <h4 class="modal-title">Update Task</h4>
     <button type="button" class="close" aria-label="Close" (click)="onCancel()">
       <span aria-hidden="true">&times;</span>
@@ -32,4 +32,45 @@
     <button type="button" class="btn btn-primary" (click)="onUpdate()">Update</button>
     <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
   </div>
-  
+   -->
+
+  <div class="fixed inset-0 overflow-y-auto flex justify-center items-center z-50">
+    <div class="bg-white rounded-lg w-[500px] border border-gray-300 max-w-2xl mx-auto shadow-xl">
+      <div class="modal-header bg-white-800 text-white">
+        <div class="flex flex-col">
+          <h4 class="modal-title text-black-700 font-bold text-center justify-center bg-black text-3xl">Update Task</h4>
+          <!-- <button type="button" class="close text-black" aria-label="Close" (click)="onCancel()">
+            <span aria-hidden="true">&times;</span>
+          </button> -->
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-4">
+              <label for="title" class="block ml-2 text-xl text-gray-700">TITLE</label>
+              <input type="text" class="mt-1 p-2 w-full border rounded-md" id="title" [(ngModel)]="updatedTask.title">
+            </div>
+            <div class="mb-4">
+              <label for="description" class="block ml-2 text-xl text-gray-700">Description</label>
+              <textarea class="mt-1 p-2 w-full border rounded-md" id="description"
+                [(ngModel)]="updatedTask.description"></textarea>
+            </div>
+            <div class="mb-4">
+              <label for="dueDate" class="block ml-2 text-xl text-gray-700">Due Date</label>
+              <input type="date" class="mt-1 p-2 w-full border rounded-md" id="dueDate" [(ngModel)]="updatedTask.dueDate">
+            </div>
+            <div class="mb-4">
+              <label for="priority" class="block ml-2 text-xl text-gray-700">Priority</label>
+              <select class="mt-1 p-2 w-full border rounded-md"  [(ngModel)]="updatedTask.priority">
+                <option value="low" class="text-gray-700">Low</option>
+                <option value="medium" class="text-gray-700">Medium</option>
+                <option value="high" class="text-gray-700">High</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer bg-gray-100 pl-7 mb-2">
+          <button type="button" class="btn-primary bg-blue-600 py-2 px-4 rounded text-black mr-2" (click)="onUpdate()">Update</button>
+          <button type="button" class="btn-secondary bg-red-600 py-2 px-4 rounded text-black" (click)="onCancel()">Cancel</button>
+        </div>
+      </div> 
+    </div>
