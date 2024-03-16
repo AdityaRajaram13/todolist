@@ -8,7 +8,6 @@ const authenticate = require('../../middleware/authenticate');
 router.post("/createtask",authenticate, async (req, res) => {
     const { title, description, dueDate, priority } = req.body;
     const createdBy = req.user._id; 
-    console.log("id",createdBy);
     try {
         const newTask = await Task.create({ title, description, dueDate, priority, createdBy });
         res.status(201).json(newTask);

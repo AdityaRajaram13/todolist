@@ -4,7 +4,7 @@ const cors = require('cors')
 const bodyParser = require("body-parser");
 require('dotenv').config();
 const connectDB = require("./db")
-PORT = 4000
+PORT = process.env.PORT
 
 app.use(cors({
     origin: ['http://localhost:4200','http://localhost:4200/'],
