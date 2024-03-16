@@ -23,7 +23,7 @@ This is a simple Todo List web application built using Angular for the frontend 
 2. **Navigate to the project directory**:
 
     ```bash
-    cd todo-list
+    cd todolist
     ```
 
 3. **Install dependencies** for the frontend:
