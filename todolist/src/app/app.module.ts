@@ -10,6 +10,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddtaskComponent } from './addtask/addtask.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UpdateTaskModalComponent } from './update-task-modal/update-task-modal.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NotyfToast } from './notyf.toast';
+
+
 
 @NgModule({
   declarations: [
@@ -19,14 +24,18 @@ import { UpdateTaskModalComponent } from './update-task-modal/update-task-modal.
     DashboardComponent,
     AddtaskComponent,
     NavbarComponent,
-    UpdateTaskModalComponent
+    UpdateTaskModalComponent,
+    NotyfToast,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-
+    BrowserAnimationsModule,  
+    ToastrModule.forRoot({ 
+      toastComponent: NotyfToast 
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

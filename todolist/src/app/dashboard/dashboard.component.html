@@ -1,41 +1,64 @@
-<app-navbar></app-navbar>
-<div *ngIf="tasks.length > 0; else noTasks" class="overflow-x-auto">
-    <table class="min-w-full divide-y divide-gray-200">
-      <thead class="bg-gray-50">
-        <tr>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Due Date</th>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Priority</th>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-        </tr>
-      </thead>
-      <tbody class="bg-white divide-y divide-gray-200">
-        <tr *ngFor="let task of tasks">
-          <td class="px-6 py-4 whitespace-nowrap">{{ task.title }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ task.description }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ task.dueDate | date }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800" *ngIf="task.priority === 'low'">
-              Low
-            </span>
-            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800" *ngIf="task.priority === 'medium'">
-              Medium
-            </span>
-            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800" *ngIf="task.priority === 'high'">
-              High
-            </span>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <button (click)="openUpdateModal(task)" class="text-indigo-600 hover:text-indigo-900">Update</button>
-            <button (click)="confirmDelete(task._id)" class="text-red-600 hover:text-red-900 ml-2">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
-  <ng-template #noTasks>
-    <p class="text-gray-500">No tasks have been created.</p>
-  </ng-template>
-  
+ <app-navbar></app-navbar>
+
+   <div>
+      <button class="bg-red-500 mt-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="redirectToCreateTask()">ADD TASK</button>
+     <button class="bg-blue-500 mt-2 ml-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="toggleSortOrder()">Toggle Sort Order</button>
+     <select [(ngModel)]="sortBy" class="mt-2 ml-2 border border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+       <option value="">Sort By</option>
+       <option value="dueDate">Due Date</option>
+       <option value="priority">Priority</option>
+     </select>
+     
+   </div>
+   
+   
+   <div *ngIf="tasks.length > 0; else noTasks" class="overflow-x-auto">
+     <table class="min-w-full divide-y divide-gray-200">
+       <thead class="bg-gray-50">
+         <tr>
+           <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+           <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+           <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+             <button (click)="sortBy = 'dueDate'; toggleSortOrder()" class="flex items-center space-x-1">
+               <span>Due Date</span>
+               <span *ngIf="sortBy === 'dueDate'" class="text-xs">&#x25B2;</span>
+               <span *ngIf="sortBy === 'dueDate'" class="text-xs">&#x25BC;</span>
+             </button>
+           </th>
+           <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+             <button (click)="sortBy = 'priority'; toggleSortOrder()" class="flex items-center space-x-1">
+               <span>Priority</span>
+               <span *ngIf="sortBy === 'priority'" class="text-xs">&#x25B2;</span>
+               <span *ngIf="sortBy === 'priority'" class="text-xs">&#x25BC;</span>
+             </button>
+           </th>
+           <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+         </tr>
+       </thead>
+       <tbody class="bg-white divide-y divide-gray-200">
+         <tr *ngFor="let task of tasks">
+           <td class="px-6 py-4 whitespace-nowrap">{{ task.title }}</td>
+           <td class="px-6 py-4 whitespace-nowrap">{{ task.description }}</td>
+           <td class="px-6 py-4 whitespace-nowrap">{{ task.dueDate | date }}</td>
+           <td class="px-6 py-4 whitespace-nowrap">
+             <span [ngClass]="{
+               'bg-green-100 text-green-800': task.priority === 'low',
+               'bg-yellow-100 text-yellow-800': task.priority === 'medium',
+               'bg-red-100 text-red-800': task.priority === 'high'
+             }" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
+               {{ task.priority }}
+             </span>
+           </td>
+           <td class="px-6 py-4 whitespace-nowrap">
+             <button (click)="openUpdateModal(task)" class="text-indigo-600 hover:text-indigo-900">Update</button>
+             <button (click)="confirmDelete(task._id)" class="text-red-600 hover:text-red-900 ml-2">Delete</button>
+           </td>
+         </tr>
+       </tbody>
+     </table>
+   </div>
+   
+   <ng-template #noTasks>
+     <p class="text-gray-500 mt-2 text-5xl">No tasks have been created.</p>
+   </ng-template>
+   

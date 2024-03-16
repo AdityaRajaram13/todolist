@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { NotyfToast } from '../notyf.toast';
 
 @Component({
   selector: 'app-addtask',
@@ -15,7 +17,9 @@ export class AddtaskComponent {
     priority: 'high'
   };
 
-  constructor(private authService: AuthService, private http: HttpClient) {}
+  constructor(private authService: AuthService, private http: HttpClient,
+    private toastrSuccess: ToastrService, 
+    private toastrError: ToastrService) {}
 
   onSubmit() {
     const { title, description, dueDate, priority } = this.taskForm;
@@ -29,13 +33,30 @@ export class AddtaskComponent {
     this.http.post<any>('http://localhost:4000/api/createtask', body, { headers })
       .subscribe(
         (response) => {
-          console.log('Task created successfully:', response);
-          alert('Task created successfully!');
+          this.toastrSuccess.success('Task created successfully!', '', { toastComponent: NotyfToast }); 
+          this.resetForm();
         },
         (error) => {
-          console.error('Error creating task:', error);
-          alert('Error creating task')
+          this.toastrError.error(  'All fields are Required', '', { toastComponent: NotyfToast }); 
         }
       );
   }
+
+  resetForm(): void {
+    this.taskForm = {
+      title: '',
+      description: '',
+      dueDate: '',
+      priority: 'high'
+    };
+  }
+  getCurrentDate(): string {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    const day = today.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
 }
+
+

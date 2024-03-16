@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service'; // Import AuthService to get the token
+import { AuthService } from './auth.service'; 
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private baseUrl = 'http://localhost:4000/api'; // Update with your API URL
+  private baseUrl = 'http://localhost:4000/api'; 
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 

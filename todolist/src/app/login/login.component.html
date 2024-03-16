@@ -1,6 +1,6 @@
 <div class="bg-slate-200 h-dvh flex">
     <div class="w-1/2 mt-20 ml-56 mb-16 drop-shadow-xl" style="background-color:#90CCBA;">
-        <h1 class="text-white mt-7 ml-8 font-bold">NestAway</h1>
+        <h1 class="text-white mt-7 ml-8 font-bold">TODOLIST</h1>
         <h1 class="font-bold text-white text-5xl mt-10 pt-20 ml-8">Welcome</h1>
         <h1 class="font-bold text-white text-5xl mt-7 ml-8">Back!</h1>
     </div>
@@ -9,10 +9,10 @@
         <p class="text-slate-400 mt-2 ml-8">Welcome back! Please login to your <br/>account</p>
         
         <form (ngSubmit)="onSubmit()">
-            <h2 class="text-black text-sm font-semibold mt-5 ml-8">Email/Username</h2>
-            <input type="text" name="username" [(ngModel)]="username" class="border border-slate-500 w-80 h-8 mt-3 ml-8 rounded" required/>
+            <h2 class="text-black text-sm font-semibold mt-5 ml-8" >Username</h2>
+            <input type="text" name="username" [(ngModel)]="username" class="border border-slate-500 w-80 h-8 mt-3 ml-8 rounded" required placeholder="Enter your username"/>
             <h2 class="text-black text-sm font-semibold mt-5 ml-8">Password</h2>
-            <input type="password" name="password" [(ngModel)]="password" class="border border-slate-500 w-80 h-8 mt-3 ml-8 rounded" required/>
+            <input type="password" name="password" [(ngModel)]="password" class="border border-slate-500 w-80 h-8 mt-3 ml-8 rounded" required placeholder="Enter your password"/>
             <button type="submit" class="text-white font-bold py-2 px-20 w-80 mt-4 h-10 ml-8 rounded" style="background-color:#90CCBA;">
                 Login
             </button>

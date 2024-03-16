@@ -1,66 +1,29 @@
-<!-- <div class="modal-header">
-    <h4 class="modal-title">Update Task</h4>
-    <button type="button" class="close" aria-label="Close" (click)="onCancel()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form>
-      <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" [(ngModel)]="updatedTask.title">
-      </div>
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea class="form-control" id="description" [(ngModel)]="updatedTask.description"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="dueDate">Due Date</label>
-        <input type="date" class="form-control" id="dueDate" [(ngModel)]="updatedTask.dueDate">
-      </div>
-      <div class="form-group">
-        <label for="priority">Priority</label>
-        <select class="form-control" id="priority" [(ngModel)]="updatedTask.priority">
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="onUpdate()">Update</button>
-    <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
-  </div>
-   -->
-
-  <div class="fixed inset-0 overflow-y-auto flex justify-center items-center z-50">
-    <div class="bg-white rounded-lg w-[500px] border border-gray-300 max-w-2xl mx-auto shadow-xl">
-      <div class="modal-header bg-white-800 text-white">
-        <div class="flex flex-col">
-          <h4 class="modal-title text-black-700 font-bold text-center justify-center bg-black text-3xl">Update Task</h4>
-          <!-- <button type="button" class="close text-black" aria-label="Close" (click)="onCancel()">
-            <span aria-hidden="true">&times;</span>
-          </button> -->
+   <div class="fixed inset-0 overflow-y-auto flex justify-center items-center z-50">
+      <div class="bg-white rounded-lg w-[500px] border border-gray-300 max-w-2xl mx-auto shadow-xl">
+        <div class="modal-header bg-white-800 text-white">
+          <div class="flex flex-col">
+            <h4 class="modal-title text-black-700 font-bold text-center justify-center bg-black text-3xl">Update Task</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="onCancel()"></button>
+          </div>
         </div>
         <div class="modal-body">
           <form>
             <div class="mb-4">
-              <label for="title" class="block ml-2 text-xl text-gray-700">TITLE</label>
-              <input type="text" class="mt-1 p-2 w-full border rounded-md" id="title" [(ngModel)]="updatedTask.title">
+              <label for="title" class="block ml-2 text-xl text-gray-700">Title</label>
+              <input type="text" class="mt-1 p-2 w-full border rounded-md" id="title" [(ngModel)]="updatedTask.title" name="title" [value]="task?.title">
             </div>
             <div class="mb-4">
               <label for="description" class="block ml-2 text-xl text-gray-700">Description</label>
-              <textarea class="mt-1 p-2 w-full border rounded-md" id="description"
-                [(ngModel)]="updatedTask.description"></textarea>
+              <textarea class="mt-1 p-2 w-full border rounded-md" id="description" [(ngModel)]="updatedTask.description" name="description">{{ task?.description }}</textarea>
             </div>
             <div class="mb-4">
               <label for="dueDate" class="block ml-2 text-xl text-gray-700">Due Date</label>
-              <input type="date" class="mt-1 p-2 w-full border rounded-md" id="dueDate" [(ngModel)]="updatedTask.dueDate">
+              <input type="date" class="mt-1 p-2 w-full border rounded-md" id="dueDate" [(ngModel)]="updatedTask.dueDate" name="dueDate" [value]="task?.dueDate" required [min]="getCurrentDate()">
             </div>
             <div class="mb-4">
               <label for="priority" class="block ml-2 text-xl text-gray-700">Priority</label>
-              <select class="mt-1 p-2 w-full border rounded-md"  [(ngModel)]="updatedTask.priority">
+              <select class="mt-1 p-2 w-full border rounded-md" [(ngModel)]="updatedTask.priority" name="priority">
+                <option [value]="task?.priority" class="text-gray-700">{{ task?.priority }}</option>
                 <option value="low" class="text-gray-700">Low</option>
                 <option value="medium" class="text-gray-700">Medium</option>
                 <option value="high" class="text-gray-700">High</option>
@@ -72,5 +35,6 @@
           <button type="button" class="btn-primary bg-blue-600 py-2 px-4 rounded text-black mr-2" (click)="onUpdate()">Update</button>
           <button type="button" class="btn-secondary bg-red-600 py-2 px-4 rounded text-black" (click)="onCancel()">Cancel</button>
         </div>
-      </div> 
+      </div>
     </div>
+    

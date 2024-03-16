@@ -32,12 +32,11 @@ router.get("/usertask",authenticate, async (req, res) => {
     }
 });
 
-
 // Update a task
 router.put("/update/:taskId",authenticate, async (req, res) => {
     const { title, description, dueDate, priority } = req.body;
     const { taskId } = req.params;
-    const createdBy = req.user._id; // Assuming you have user authentication middleware
+    const createdBy = req.user._id; 
     try {
         const task = await Task.findOneAndUpdate({ _id: taskId, createdBy }, { title, description, dueDate, priority }, { new: true });
         if (!task) {
@@ -53,7 +52,7 @@ router.put("/update/:taskId",authenticate, async (req, res) => {
 // Delete a task
 router.delete("/delete/:taskId",authenticate, async (req, res) => {
     const { taskId } = req.params;
-    const createdBy = req.user._id; // Assuming you have user authentication middleware
+    const createdBy = req.user._id; 
     try {
         const task = await Task.findOneAndDelete({ _id: taskId, createdBy });
         if (!task) {

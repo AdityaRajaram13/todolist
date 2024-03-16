@@ -10,7 +10,7 @@
     </div>
     <div class="mb-4">
       <label for="dueDate" class="block text-gray-700 mt-2 ml-2 font-bold">Due Date</label>
-      <input type="date" name="dueDate" [(ngModel)]="taskForm.dueDate" id="dueDate" class="mt-1 p-2 w-full border rounded-md" placeholder="Select due date">
+      <input type="date" name="dueDate"  [(ngModel)]="taskForm.dueDate" id="dueDate" class="mt-1 p-2 w-full border rounded-md" placeholder="Select due date" required [min]="getCurrentDate()">
     </div>
     <div class="mb-4">
       <label for="priority" class="block text-gray-700 mt-2 ml-2 font-bold">Priority</label>

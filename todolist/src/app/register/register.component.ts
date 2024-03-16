@@ -1,6 +1,8 @@
 import { Component,OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { NotyfToast } from '../notyf.toast';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +15,9 @@ export class RegisterComponent implements OnInit {
   email: string = '';
   password: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router,
+    private toastrSuccess: ToastrService, 
+    private toastrError: ToastrService) {}
 
   ngOnInit() { }
 
@@ -22,13 +26,14 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         (response) => {
           this.router.navigate(['/login']);
-          alert('Registration successful!');
+          this.toastrSuccess.success('Registration successful!', '', { toastComponent: NotyfToast }); 
+
           this.username = '';
           this.email = '';
           this.password = '';
         },
         (error) => {
-          alert('Registration failed: ' + error.error.error);
+          this.toastrError.error(  error.error.error, '', { toastComponent: NotyfToast }); 
         }
       );
   }

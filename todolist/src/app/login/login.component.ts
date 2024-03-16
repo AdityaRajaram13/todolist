@@ -1,17 +1,24 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { NotyfToast } from '../notyf.toast'; 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   username: string = '';
   password: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private toastrSuccess: ToastrService, 
+    private toastrError: ToastrService,
+  ) {}
 
   ngOnInit() { }
 
@@ -20,15 +27,19 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (response) => {
           if (response.status === 'success') {
-            localStorage.setItem('token', response.token); 
-            alert('Login successful!');
-            this.router.navigate(['/dashboard']); 
+            localStorage.setItem('token', response.token);
+            this.toastrSuccess.success('Login Successful!', 'LOGIN', { toastComponent: NotyfToast }); // Display success toast
+            this.router.navigate(['/dashboard']);
           } else {
-            alert(response.error);
+            this.toastrError.error(response.error, 'Login failed:', { toastComponent: NotyfToast }); // Display server error in toast
           }
         },
         (error) => {
-          alert('Login failed: ' + error.message);
+          if (error.error && error.error.error) {
+            this.toastrError.error(  error.error.error, 'Login failed:', { toastComponent: NotyfToast }); 
+          } else {
+            this.toastrError.error( error.message, 'Login failed:', { toastComponent: NotyfToast }); 
+          }
         }
       );
   }
