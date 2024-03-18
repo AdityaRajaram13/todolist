@@ -3,10 +3,15 @@ const User = require("../model/User");
 
 const router = express.Router();
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 router.post("/", async (req, res) => {
     const { name, username, email, password } = req.body;
     if (!name || !username || !email || !password) {
         return res.status(400).json({ status: "failed", error: "Username, email, and password are required" });
+    }
+    if (!emailRegex.test(email)) {
+        return res.status(400).json({ status: "failed", error: "Invalid email format" });
     }
     try {
         const existingUser = await User.findOne({ $or: [{ username }, { email }] });

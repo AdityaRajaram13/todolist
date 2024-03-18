@@ -21,7 +21,7 @@ const userSchema = new Schema({
     required: true,
     unique: true,
     trim: true,
-    lowercase: true, // Convert email to lowercase before saving
+    lowercase: true, 
   },
   password: {
     type: String,
