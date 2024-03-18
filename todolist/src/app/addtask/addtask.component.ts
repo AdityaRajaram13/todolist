@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { AuthService } from '../services/auth.service';
+import { TaskService } from '../services/task.service'; // Import TaskService
 import { ToastrService } from 'ngx-toastr';
 import { NotyfToast } from '../notyf.toast';
 
@@ -17,29 +16,26 @@ export class AddtaskComponent {
     priority: 'high'
   };
 
-  constructor(private authService: AuthService, private http: HttpClient,
-    private toastrSuccess: ToastrService, 
-    private toastrError: ToastrService) {}
+  constructor(
+    private taskService: TaskService, // Inject TaskService
+    private toastrSuccess: ToastrService,
+    private toastrError: ToastrService
+  ) {}
 
   onSubmit() {
     const { title, description, dueDate, priority } = this.taskForm;
-    const token = localStorage.getItem('token');
-    let headers: { Authorization: string } | undefined;
-    if (token) {
-      headers = { Authorization: `Bearer ${token}` };
-    }
-    const body = { title, description, dueDate, priority };
 
-    this.http.post<any>('http://localhost:4000/api/createtask', body, { headers })
-      .subscribe(
-        (response) => {
-          this.toastrSuccess.success('Task created successfully!', '', { toastComponent: NotyfToast }); 
-          this.resetForm();
-        },
-        (error) => {
-          this.toastrError.error(  'All fields are Required', '', { toastComponent: NotyfToast }); 
-        }
-      );
+    const taskData = { title, description, dueDate, priority };
+
+    this.taskService.createTask(taskData).subscribe(
+      (response) => {
+        this.toastrSuccess.success('Task created successfully!', '', { toastComponent: NotyfToast });
+        this.resetForm();
+      },
+      (error) => {
+        this.toastrError.error('All fields are required', '', { toastComponent: NotyfToast });
+      }
+    );
   }
 
   resetForm(): void {
@@ -50,6 +46,7 @@ export class AddtaskComponent {
       priority: 'high'
     };
   }
+
   getCurrentDate(): string {
     const today = new Date();
     const year = today.getFullYear();
@@ -58,5 +55,3 @@ export class AddtaskComponent {
     return `${year}-${month}-${day}`;
   }
 }
-
-

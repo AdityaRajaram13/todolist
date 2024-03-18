@@ -2,14 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service'; 
-
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private baseUrl = 'http://localhost:4000/api'; 
-
+  private baseUrl = environment.apiUrl; 
   constructor(private http: HttpClient, private authService: AuthService) { }
+   
+  
+
 
   getUserTasks(): Observable<any[]> {
     const token = localStorage.getItem('token'); 
@@ -27,5 +29,10 @@ export class TaskService {
     const token = localStorage.getItem('token'); 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.put<any>(`${this.baseUrl}/update/${taskId}`, taskData, { headers });
+  }
+  createTask(taskData: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(`${this.baseUrl}/createtask`, taskData, { headers });
   }
 }

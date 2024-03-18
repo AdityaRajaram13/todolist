@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private baseUrl = environment.apiUrl;
   private currentUserSubject = new BehaviorSubject<any>(null);
   currentUser: Observable<any>;
 
@@ -33,8 +34,6 @@ export class AuthService {
     }
   }
 
-
-
   public get currentUserValue(): any {
     return this.currentUserSubject.value;
   }
@@ -46,5 +45,13 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     this.currentUserSubject.next(null); 
+  }
+
+  signIn(username: string, password: string): Observable<any> {    
+    return this.http.post<any>(`${this.baseUrl}/signin`, { username, password });
+  }
+
+  signUp(name: string, username: string, email: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/signup`, { name, username, email, password });
   }
 }

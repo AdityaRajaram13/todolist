@@ -40,3 +40,6 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Environment files (add or remove based on your needs)
+src/environments/

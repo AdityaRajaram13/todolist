@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NotyfToast } from '../notyf.toast';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -17,12 +18,14 @@ export class RegisterComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router,
     private toastrSuccess: ToastrService, 
-    private toastrError: ToastrService) {}
+    private toastrError: ToastrService,
+    private authService: AuthService,
+    ) {}
 
   ngOnInit() { }
 
   onSubmit() {
-    this.http.post<any>('http://localhost:4000/api/signup', { name:this.name,username: this.username, email: this.email, password: this.password })
+    this.authService.signUp(this.name, this.username, this.email, this.password)
       .subscribe(
         (response) => {
           this.router.navigate(['/login']);
