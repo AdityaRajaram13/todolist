@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NotyfToast } from '../notyf.toast';
 import { AuthService } from '../services/auth.service'; 
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -22,16 +23,17 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() { }
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
+    if (form.valid) {
     this.authService.signIn(this.username, this.password) 
       .subscribe(
         (response) => {
           if (response.status === 'success') {
             localStorage.setItem('token', response.token);
-            this.toastrSuccess.success('Login Successful!', 'LOGIN', { toastComponent: NotyfToast }); // Display success toast
+            this.toastrSuccess.success('Login Successful!', 'LOGIN', { toastComponent: NotyfToast }); 
             this.router.navigate(['/dashboard']);
           } else {
-            this.toastrError.error(response.error, 'Login failed:', { toastComponent: NotyfToast }); // Display server error in toast
+            this.toastrError.error(response.error, 'Login failed:', { toastComponent: NotyfToast }); 
           }
         },
         (error) => {
@@ -42,5 +44,9 @@ export class LoginComponent implements OnInit {
           }
         }
       );
+    }else
+    {
+      this.toastrError.error( 'All valid fields required', '', { toastComponent: NotyfToast }); 
+    }
   }
 }

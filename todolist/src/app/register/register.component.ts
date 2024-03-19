@@ -24,13 +24,13 @@ export class RegisterComponent {
   ) {}
 
   onSubmit(form: NgForm) {
-    if (form.valid) {
+    if (form.valid)
+     {
       this.authService.signUp(this.name, this.username, this.email, this.password)
         .subscribe(
           (response) => {
             this.router.navigate(['/login']);
-            this.toastrSuccess.success('Registration successful!', '', { toastComponent: NotyfToast }); 
-
+            this.toastrSuccess.success('Registration successful!', '', { toastComponent: NotyfToast });
             this.username = '';
             this.email = '';
             this.password = '';
@@ -39,6 +39,8 @@ export class RegisterComponent {
             this.toastrError.error(error.error.error, '', { toastComponent: NotyfToast }); 
           }
         );
+    }else{
+      this.toastrError.error('All valid fields are required','', { toastComponent: NotyfToast }); 
     }
   }
 }

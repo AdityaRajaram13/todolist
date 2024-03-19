@@ -18,7 +18,7 @@
             </div>
             <div class="mb-4">
               <label for="dueDate" class="block ml-2 text-xl text-gray-700">Due Date</label>
-              <input type="date" class="mt-1 p-2 w-full border rounded-md" id="dueDate" [(ngModel)]="updatedTask.dueDate" name="dueDate" [value]="task?.dueDate" required [min]="getCurrentDate()">
+              <input type="date" class="mt-1 p-2 w-full border rounded-md" id="dueDate" [(ngModel)]="updatedTask.dueDate" name="dueDate" [value]="task?.dueDate" required [min]="getCurrentDate()" [max]="getMaxDate()">
             </div>
             <div class="mb-4">
               <label for="priority" class="block ml-2 text-xl text-gray-700">Priority</label>

@@ -6,18 +6,20 @@
     </div>
     <div class="basis-1/2 bg-white mt-20 mb-16 mr-56 drop-shadow-2xl">
         <h1 class="text-black text-2xl font-bold mt-14 ml-8">Login</h1>
-        <p class="text-slate-400 mt-2 ml-8">Welcome back! Please login to your <br/>account</p>
-        
-        <form (ngSubmit)="onSubmit()">
-            <h2 class="text-black text-sm font-semibold mt-5 ml-8" >Username</h2>
-            <input type="text" name="username" [(ngModel)]="username" class="border border-slate-500 w-80 h-8 mt-3 ml-8 rounded" required placeholder="Enter your username"/>
-            <h2 class="text-black text-sm font-semibold mt-5 ml-8">Password</h2>
-            <input type="password" name="password" [(ngModel)]="password" class="border border-slate-500 w-80 h-8 mt-3 ml-8 rounded" required placeholder="Enter your password"/>
-            <button type="submit" class="text-white font-bold py-2 px-20 w-80 mt-4 h-10 ml-8 rounded" style="background-color:#90CCBA;">
-                Login
-            </button>
+        <p class="text-slate-400 mt-2 ml-8">Welcome back! Please login to your <br/>account</p>     
+        <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+            <div class="form-group">
+                <h2 class="text-black text-sm font-semibold mt-5 ml-8">Username</h2>
+                <input type="text" name="username" [(ngModel)]="username" class="border border-slate-500 w-80 h-8 mt-3 ml-8 rounded" required placeholder="Enter your username"/>
+                <div *ngIf="loginForm.controls['username'].errors?.['required'] && loginForm.controls['username'].touched" class="text-red-500 text-sm ml-8">Username is required.</div>
+            </div>
+            <div class="form-group">
+                <h2 class="text-black text-sm font-semibold mt-5 ml-8">Password</h2>
+                <input type="password" name="password" [(ngModel)]="password" class="border border-slate-500 w-80 h-8 mt-3 ml-8 rounded" required placeholder="Enter your password"/>
+                <div *ngIf="loginForm.controls['password'].errors?.['required'] && loginForm.controls['password'].touched" class="text-red-500 text-sm ml-8">Password is required.</div>
+            </div>
+            <button type="submit" class="text-white font-bold py-2 px-20 w-80 mt-4 h-10 ml-8 rounded" style="background-color:#90CCBA;">Login</button>
         </form>
-
         <div class="flex">
             <p class="text-slate-400 mt-2 ml-8 mr-2">New User?</p>
             <a routerLink="/register" class="mt-2" style="color:#90CCBA;">Signup</a>

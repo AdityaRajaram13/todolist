@@ -2,7 +2,6 @@
 
    <div>
       <button class="bg-red-500 mt-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="redirectToCreateTask()">ADD TASK</button>
-     <button class="bg-blue-500 mt-2 ml-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="toggleSortOrder()">Toggle Sort Order</button>
      <select [(ngModel)]="sortBy" class="mt-2 ml-2 border border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
        <option value="">Sort By</option>
        <option value="dueDate">Due Date</option>

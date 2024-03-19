@@ -10,12 +10,13 @@
         <p class="text-slate-400 mt-2 ml-8">Create Your Account.</p>
           <div class="form-group">
           <h2 class="text-black text-sm font-semibold mt-2 ml-8">Name</h2>
-          <input type="text" name="name" class="border border-slate-500 w-80 h-8 mt-3 ml-8 rounded" [(ngModel)]="name" required minlength="4" placeholder="Enter your name">
-          <div *ngIf="registrationForm.controls['name']?.invalid && (registrationForm.controls['name']?.touched || registrationForm.controls['name']?.dirty)">
+          <input type="text" name="name" class="border border-slate-500 w-80 h-8 mt-3 ml-8 rounded" [(ngModel)]="name" required minlength="4" maxlength="25" placeholder="Enter your name" pattern="[a-zA-Z ]*" >
+          <div *ngIf="registrationForm.controls['name']?.invalid && (registrationForm.controls['name']?.touched || registrationForm.controls['name']?.dirty) ">
             <small class="text-red-500 text-sm ml-8">
-              <span *ngIf="registrationForm.controls['name']?.errors?.['name']">Name is required.</span>
+              <span *ngIf="registrationForm.controls['name']?.errors?.['required']">Name is required.</span>
               <span *ngIf="registrationForm.controls['name']?.errors?.['minlength']">Name must be at least 4 characters long.</span>
-            </small>                                              
+              <span *ngIf="registrationForm.controls['name']?.errors?.['pattern']">Only alphabets[Aa-Zz] are allowed.</span>
+            </small>                                             
           </div>        
         </div>
           <div class="form-group">
@@ -25,17 +26,17 @@
             <small class="text-red-500 text-sm ml-8">
               <span *ngIf="registrationForm.controls['username']?.errors?.['username']">Username is required.</span>
               <span *ngIf="registrationForm.controls['username']?.errors?.['minlength']">Username must be at least 6 characters long.</span>
-
             </small>
           </div>
         </div>
           <div class="form-group">
           <h2 class="text-black text-sm font-semibold mt-2 ml-8">Email</h2>
-          <input type="email" name="email" class="border border-slate-500 w-80 h-8 mt-3 ml-8 rounded" [(ngModel)]="email" required  placeholder="Enter your email">
+          <input type="email" name="email" class="border border-slate-500 w-80 h-8 mt-3 ml-8 rounded" [(ngModel)]="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="Enter your email">
           <div *ngIf="registrationForm.controls['email']?.invalid && (registrationForm.controls['email']?.touched || registrationForm.controls['email']?.dirty)">
             <small class="text-red-500 text-sm ml-8">
               <span *ngIf="registrationForm.controls['email']?.errors?.['email']">Email is required.</span>
               <span *ngIf="registrationForm.controls['email']?.errors?.['required']">Invalid email format.</span>
+              <span *ngIf="registrationForm.controls['email']?.errors?.['pattern']">Please enter a valid email address.</span>
             </small>
           </div>
         </div>

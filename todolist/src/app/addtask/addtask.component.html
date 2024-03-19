@@ -1,25 +1,32 @@
 <app-navbar></app-navbar>
-<form (ngSubmit)="onSubmit()" class="max-w-md mx-auto mt-10 border border-gray-300">
+
+<form  (ngSubmit)="onSubmit()" class="max-w-md mx-auto mt-10 border border-gray-300">
     <div class="mb-4">
-      <label for="title" class="block text-gray-700 mt-2 ml-2 font-bold">Title</label>
-      <input type="text" name="title" [(ngModel)]="taskForm.title" id="title" class="mt-2 p-2 w-full border rounded-md" placeholder="Enter task title">
+        <label for="title" class="block text-gray-700 mt-2 ml-2 font-bold">Title</label>
+        <input type="text" name="title" [(ngModel)]="taskForm.title" #title="ngModel" id="title" class="mt-2 p-2 w-full border rounded-md" placeholder="Enter task title" required maxlength="50">
+        <div *ngIf="title.invalid && (title.dirty || title.touched)" class="text-red-500 text-sm ml-2">Title is required.</div>
+    </div>
+
+    <div class="mb-4">
+        <label for="description" class="block text-gray-700 mt-2 ml-2 font-bold">Description</label>
+        <textarea name="description" [(ngModel)]="taskForm.description" #description="ngModel" id="description" class="mt-1 p-2 w-full border rounded-md" rows="3" placeholder="Describe your task" required maxlength="200"></textarea>
+        <div *ngIf="description.invalid && (description.dirty || description.touched)" class="text-red-500 text-sm ml-2">Description is required.</div>
     </div>
     <div class="mb-4">
-      <label for="description" class="block text-gray-700 mt-2 ml-2 font-bold">Description</label>
-      <textarea name="description" [(ngModel)]="taskForm.description" id="description" class="mt-1 p-2 w-full border rounded-md" rows="3" placeholder="Describe your task"></textarea>
+        <label for="dueDate" class="block text-gray-700 mt-2 ml-2 font-bold">Due Date</label>
+        <input type="date" name="dueDate" [(ngModel)]="taskForm.dueDate" #dueDate="ngModel" id="dueDate" class="mt-1 p-2 w-full border rounded-md" placeholder="Select due date" required [min]="getCurrentDate()" [max]="getMaxDate()">
+        <div *ngIf="dueDate.invalid && (dueDate.dirty || dueDate.touched)" class="text-red-500 text-sm ml-2">Due Date is required.</div>
     </div>
+
     <div class="mb-4">
-      <label for="dueDate" class="block text-gray-700 mt-2 ml-2 font-bold">Due Date</label>
-      <input type="date" name="dueDate"  [(ngModel)]="taskForm.dueDate" id="dueDate" class="mt-1 p-2 w-full border rounded-md" placeholder="Select due date" required [min]="getCurrentDate()">
-    </div>
-    <div class="mb-4">
-      <label for="priority" class="block text-gray-700 mt-2 ml-2 font-bold">Priority</label>
-      <select name="priority" [(ngModel)]="taskForm.priority" id="priority" class="mt-1 p-2 w-full border rounded-md">
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
+        <label for="priority" class="block text-gray-700 mt-2 ml-2 font-bold">Priority</label>
+        <select name="priority" [(ngModel)]="taskForm.priority" #priority="ngModel" id="priority" class="mt-1 p-2 w-full border rounded-md">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
       </select>
     </div>
     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2 ml-2">Create Task</button>
-  </form>
-  
+</form>
+
+

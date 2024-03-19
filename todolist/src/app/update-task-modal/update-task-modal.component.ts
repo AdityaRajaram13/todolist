@@ -26,7 +26,6 @@ export class UpdateTaskModalComponent implements OnInit {
     this.taskService.updateTask(this.task._id, this.updatedTask).subscribe(
       () => {
         this.toastrSuccess.success('Task updated successfully', 'Success', { toastComponent: NotyfToast }); 
-
         this.activeModal.close('taskUpdated');
       },
       (error) => {
@@ -48,4 +47,11 @@ export class UpdateTaskModalComponent implements OnInit {
     const day = today.getDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
+  getMaxDate(): string {
+    const today = new Date();
+    const year = today.getFullYear() + 20;
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    const day = today.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
 }
