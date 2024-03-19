@@ -21,7 +21,11 @@ export class LoginComponent implements OnInit {
     private toastrError: ToastrService,
   ) {}
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
   onSubmit(form: NgForm) {
     if (form.valid) {

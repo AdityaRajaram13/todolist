@@ -23,6 +23,12 @@ export class RegisterComponent {
     private toastrError: ToastrService
   ) {}
 
+  ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
+
   onSubmit(form: NgForm) {
     if (form.valid)
      {
