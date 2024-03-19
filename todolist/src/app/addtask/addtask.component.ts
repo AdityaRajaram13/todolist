@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TaskService } from '../services/task.service'; // Import TaskService
 import { ToastrService } from 'ngx-toastr';
 import { NotyfToast } from '../notyf.toast';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-addtask',
   templateUrl: './addtask.component.html',
@@ -18,7 +19,8 @@ export class AddtaskComponent {
   constructor(
     private taskService: TaskService, 
     private toastrSuccess: ToastrService,
-    private toastrError: ToastrService
+    private toastrError: ToastrService,
+    private router: Router
   ) {}
 
   onSubmit() {
@@ -33,6 +35,7 @@ export class AddtaskComponent {
       (response) => {
         this.toastrSuccess.success('Task created successfully!', '', { toastComponent: NotyfToast });
         this.resetForm();
+        this.router.navigate(['/dashboard']);
       },
       (error) => {
         this.toastrError.error('All fields are required','', { toastComponent: NotyfToast });
